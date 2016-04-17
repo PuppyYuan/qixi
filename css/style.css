@@ -57,6 +57,10 @@ ul,li{
     -moz-animation-play-state: paused;
 }
 
+.boyOriginal{
+    background-position: -150px 0;
+}
+
 .slowFlowerWalk{
     animation: person-flower-slow 950ms steps(1, start) infinite;
     -webkit-animation: person-flower-slow 950ms steps(1, start) infinite;
@@ -112,4 +116,40 @@ ul,li{
     100% {background-position: -300px 0;}
 }
 
+.boy-rotate{
+    animation: boy-rotate 850ms step-start 1 forwards;
+    -webkit-animation: boy-rotate 850ms step-start 1 forwards;
+    -moz-animation: boy-rotate 850ms step-start 1 forwards;
+}
+
+@keyframes boy-rotate{
+    0%{background-position: -603px -291px;}
+    16.7%{background-position: -150px 0;}
+    33.4%{background-position: -453px -291px;}
+    50.1%{background-position: 0 0;}
+    66.8%{background-position: -903px -291px;}
+    83.5%{background-position: -753px -291px;}
+    100%{background-position: -603px -291px;}
+}
+
+@-webkit-keyframes boy-rotate{
+    0%{background-position: -603px -291px;}
+    16.7%{background-position: -150px 0;}
+    33.4%{background-position: -453px -291px;}
+    50.1%{background-position: 0 0;}
+    66.8%{background-position: -903px -291px;}
+    83.5%{background-position: -753px -291px;}
+    100%{background-position: -603px -291px;}
+}
+
+
+@-moz-keyframes boy-rotate{
+    0%{background-position: -603px -291px;}
+    16.7%{background-position: -150px 0;}
+    33.4%{background-position: -453px -291px;}
+    50.1%{background-position: 0 0;}
+    66.8%{background-position: -903px -291px;}
+    83.5%{background-position: -753px -291px;}
+    100%{background-position: -603px -291px;}
+}
 

@@ -72,8 +72,10 @@
                     <li class="stars5"></li>
                     <li class="stars6"></li>
                 </ul>
+                <div class="logo"></div>
             </li>
         </ul>
+        <div id="snowflake"></div>
         <div id="boy" class="charactor"></div>
     </div>
     <div class="button">
@@ -91,6 +93,16 @@
             var swipe = Swipe(container);
             var visualWidth = container.width();
             var boy = BoyWalk();
+            var visualHeight = container.height();
+            
+            var snowflakeUrl = [
+                'images/snowflake/snowflake1.png',
+                'images/snowflake/snowflake2.png',
+                'images/snowflake/snowflake3.png',
+                'images/snowflake/snowflake4.png',
+                'images/snowflake/snowflake5.png',
+                'images/snowflake/snowflake6.png',
+            ];
             
             function scrollTo(time, propotionX){
                 var distX = container.width() * propotionX;
@@ -117,15 +129,36 @@
                 getHeight: function(){
                     return this.elem.height();
                 },
+                getWidth: function(){
+                    return this.elem.width();
+                },
                 setOffset: function(){
                     this.elem.css({
                         left: visualWidth / 2, 
                         top: bridgeY - this.getHeight()
                     });
+                },
+                getOffset: function(){
+                    return this.elem.offset();  
+                },
+                rotate: function(){
+                    this.elem.addClass('girl-rotate');
                 }
             }
             
             girl.setOffset();
+            
+            boy.setFlowerWalk();
+            
+            var logo = {
+                elem: $('.logo'),
+                run: function(){
+                    this.elem.addClass('logolightSpeedIn')
+                        .on('animationend', function(){
+                            $(this).addClass('logoShake').off();
+                        });
+                }
+            };
             
             // var bird = {
             //     elem: $(".bird"),
@@ -160,8 +193,97 @@
             //         });
             // }
             
+            function snowflake(){
+                var $flakeContainer = $('#snowflake');
+                
+                function getImageName(){
+                    return snowflakeUrl[Math.floor(Math.random() * 6)];
+                }
+                
+                function createSnowBox(){
+                    var url= getImageName();
+                    return $('<div class="snowbox" />').css({
+                        'width': 41,
+                        'height': 41,
+                        'position': 'absolute',
+                        'backgroundSize': 'cover',
+                        'zIndex': 10000,
+                        'top': '-41px',
+                        'backgroundImage': 'url(' + url + ')'
+                    }).addClass('snowRoll');
+                }
+                
+                setInterval(function(){
+                    var startPosLeft = Math.random() * visualWidth - 100,
+                        startOpacity = 1,
+                        endPosTop = visualHeight - 40,
+                        endPosLeft = startPosLeft  - 100 + Math.random() * 500,
+                        duration = visualHeight * 10 + Math.random() * 5000;
+                        
+                     var randomStart = Math.random();
+                     randomStart = randomStart < 0.5 ? startOpacity : randomStart;
+                     
+                     var $flake = createSnowBox();
+                     
+                     $flake.css({
+                         left: startPosLeft, opacity: randomStart
+                     });   
+                     
+                     $flakeContainer.append($flake);
+                     
+                     $flake.transition({
+                         top: endPosTop, 
+                         left: endPosLeft,
+                         opacity: 0.7
+                     }, duration, 'ease-out', function(){
+                         $(this).remove();
+                     });
+                }, 200);
+            }
+            
+            var audioConfig = {
+                enable: true,
+                playUrl: 'music/happy.wav',
+                cycleUrl: 'music/circulation.wav'
+            }
+            
+            function html5Audio(url, loop){
+                var audio = new Audio(url);
+                audio.autoPlay = true;
+                audio.loop = loop || false;
+                audio.play();
+                return {
+                    end: function(callback){
+                        audio.addEventListener('ended', function(){
+                            callback();
+                        }, false);
+                    }
+                }
+            }
+            
             $('button:first').on('click', function(){ 
-                startRun();
+                //startRun();
+                // boy.walkTo(2000, 0.15)
+                //     .then(function(){
+                //         return boy.walkTo(1500, 0.25, (bridgeY -girl.getHeight()) / visualHeight);
+                //     }).then(function(){
+                //         var proptionX = (girl.getOffset().left - boy.getWidth() + girl.getWidth() / 5) / visualWidth;
+                //         return boy.walkTo(1500, proptionX);
+                //     }).then(function(){
+                //         boy.resetOriginal();
+                //     }).then(function(){
+                //         setTimeout(function(){
+                //             girl.rotate();
+                //             boy.rotate(function(){
+                //                 logo.run();
+                //             });
+                //         }, 1000);
+                //     });
+                snowflake();
+                var audio1 = html5Audio(audioConfig.playUrl);
+                audio1.end(function(){
+                    html5Audio(audioConfig.cycleUrl, true);
+                });
             });
 
         });

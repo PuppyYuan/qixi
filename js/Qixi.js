@@ -177,6 +177,26 @@ function BoyWalk() {
         },
         takeFlower: function(){
             return takeFlower();
+        },
+        resetOriginal: function(){
+            this.stopWalk();
+            $boy.removeClass('slowWalk slowFlowerWalk').addClass('boyOriginal');
+        },
+        setFlowerWalk: function(){
+            $boy.addClass('slowFlowerWalk');
+        },
+        getWidth: function(){
+            return $boy.width();
+        },
+        rotate: function(callback){
+            restoreWalk();
+            $boy.addClass('boy-rotate');
+            if(callback){
+                $boy.on('animationend', function(){
+                    callback();
+                    $(this).off();
+                });
+            }
         }
     };
 }
