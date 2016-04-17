@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="css/style.css" type="text/css"></link>
+    <link rel="stylesheet" href="css/pageA.css" type="text/css"></link>
+    <link rel="stylesheet" href="css/pageB.css" type="text/css"></link>
+    <link rel="stylesheet" href="css/pageC.css" type="text/css"></link>
+    <style type="text/css">
+        button {
+            width: 80px;
+            height: 50px;
+        }
+        
+        .button {
+            position: absolute;
+            bottom: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="content">
+        <ul class="content-wrap">
+            <li>
+                <div class="a_background">
+                    <div class="a_background_top"></div>
+                    <div class="a_background_mid"></div>
+                    <div class="a_background_bot"></div>
+                </div>
+                <div class="cloudArea">
+                    <div class="cloud cloud1 cloud1Anim"></div>
+                    <div class="cloud cloud2 cloud2Anim"></div>
+                </div>
+                <div id="sun" class="rotation"></div>
+            </li>
+            <li>
+                <div class="b_background"></div>
+                <div class="b_background_preload"></div>
+
+                <div class="shop">
+                    <div class="door">
+                        <div class="door-left"></div>
+                        <div class="door-right"></div>
+                    </div>
+                    <div class="lamp"></div>
+                </div>
+                <div class="bird birdFly"></div>
+            </li>
+            <li>
+                <div class="c_background">
+                    <div class="c_background_top"></div>
+                    <div class="c_background_mid"></div>
+                    <div class="c_background_bot"></div>
+                </div>
+                <div class="girl"></div>
+                <div class="bridge-bottom">
+                    <div class="water">
+                        <div class="water_1" id="water_1"></div>
+                        <div class="water_2" id="water_2"></div>
+                        <div class="water_3" id="water_3"></div>
+                        <div class="water_4" id="water_4"></div>
+                    </div>
+                </div>
+                <ul class="stars">
+                    <li class="stars1"></li>
+                    <li class="stars2"></li>
+                    <li class="stars3"></li>
+                    <li class="stars4"></li>
+                    <li class="stars5"></li>
+                    <li class="stars6"></li>
+                </ul>
+            </li>
+        </ul>
+        <div id="boy" class="charactor"></div>
+    </div>
+    <div class="button">
+        <button>开始</button>
+        <button>暂停</button>
+    </div>
+    <script src="js/jquery-1.12.3.min.js"></script>
+    <script src="js/jquery.transit.min.js"></script>
+    <script src="js/Swipe.js"></script>
+    <script src="js/Qixi.js"></script>
+    <!--<script src="js/BoyWalk.js"></script>-->
+    <script>
+        $(function(){
+            var container = $('#content');
+            var swipe = Swipe(container);
+            var visualWidth = container.width();
+            var boy = BoyWalk();
+            
+            function scrollTo(time, propotionX){
+                var distX = container.width() * propotionX;
+                swipe.scrollTo(distX, time);
+            }
+            
+            var getValue = function (className) {
+                var $elem = $('' + className);
+                return {
+                    height: $elem.height(),
+                    top: $elem.position().top
+                }
+            };
+            
+            var bridgeY = function(){
+                var data = getValue('.c_background_mid');
+                return data.top;
+            }();
+            
+            swipe.scrollTo(container.width() * 2, 0);  
+            
+            var girl = {
+                elem: $('.girl'),
+                getHeight: function(){
+                    return this.elem.height();
+                },
+                setOffset: function(){
+                    this.elem.css({
+                        left: visualWidth / 2, 
+                        top: bridgeY - this.getHeight()
+                    });
+                }
+            }
+            
+            girl.setOffset();
+            
+            // var bird = {
+            //     elem: $(".bird"),
+            //     fly: function() {
+            //         this.elem.addClass('birdFly')
+            //         this.elem.transition({
+            //             right: container.width()
+            //         }, 15000, 'linear');
+            //     }
+            // };
+            
+            // function startRun(){
+            //     boy.walkTo(2000, 0.5)
+            //         .then(function(){
+            //             boy.stopWalk();
+            //         }).then(function(){
+            //             return openDoor();
+            //         }).then(function(){
+            //             lamp.bright();
+            //         }).then(function(){
+            //             return boy.toShop(2000);
+            //         }).then(function(){
+            //             boy.takeFlower();
+            //         }).then(function(){
+            //             bird.fly();   
+            //         }).then(function(){
+            //             return boy.outShop(2000);
+            //         }).then(function(){
+            //             return shutDoor();
+            //         }).then(function(){
+            //             lamp.dark();
+            //         });
+            // }
+            
+            $('button:first').on('click', function(){ 
+                startRun();
+            });
+
+        });
+    </script>
+</body>
+
+</html>

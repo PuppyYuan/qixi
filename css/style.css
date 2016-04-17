@@ -1,0 +1,115 @@
+html, body, div, ul, li{
+    margin: 0;
+    padding: 0;
+}
+
+ul,li{
+    list-style: none;
+}
+
+#content{
+    width: 100%;
+    height: 100%;
+    /*top: 20%;*/
+    /*left: 20%;*/
+    overflow: hidden;
+    position: absolute;
+    /*border: 1px solid #ccc;*/
+}
+
+.content-wrap{
+    position: relative;
+}
+
+.content-wrap > li{
+    width: 100%;
+    height: 100%;
+    /*color: #f00;*/
+    float: left;
+    overflow: hidden;
+    position: relative;
+}
+
+.content-wrap > li:nth-child(2){
+}
+
+.content-wrap > li:nth-child(3){
+}
+
+.charactor{
+    width: 151px;
+    height: 291px;
+    background: url("../images/boy.png") 0 -291px no-repeat;
+    position: absolute;
+    left: 6%;
+    top: 55%;
+}
+
+.slowWalk{
+    animation: person-slow 950ms steps(1, start) infinite;
+    -webkit-animation: person-slow 950ms steps(1, start) infinite;
+    -moz-animation: person-slow 950ms steps(1, start) infinite;     
+}
+
+.pauseWalk{
+    animation-play-state: paused;
+    -webkit-animation-play-state: paused;
+    -moz-animation-play-state: paused;
+}
+
+.slowFlowerWalk{
+    animation: person-flower-slow 950ms steps(1, start) infinite;
+    -webkit-animation: person-flower-slow 950ms steps(1, start) infinite;
+    -moz-animation: person-flower-slow 950ms steps(1, start) infinite; 
+}
+
+
+@keyframes person-slow {
+    0% {background-position: 0 -291px;}
+    25% {background-position: -602px 0;}
+    50% {background-position: -302px -291px;}
+    75% {background-position: -151px -291px;}
+    100% {background-position: 0 -291px;}
+}
+
+@-webkit-keyframes person-slow {
+    0% {background-position: 0 -291px;}
+    25% {background-position: -602px 0;}
+    50% {background-position: -302px -291px;}
+    75% {background-position: -151px -291px;}
+    100% {background-position: 0 -291px;}
+}
+
+@-moz-keyframes person-slow {
+    0% {background-position: 0 -291px;}
+    25% {background-position: -602px 0;}
+    50% {background-position: -302px -291px;}
+    75% {background-position: -151px -291px;}
+    100% {background-position: 0 -291px;}
+}
+
+@keyframes person-flower-slow {
+    0% {background-position: -453px 0;}
+    25% {background-position: -904px 0;}
+    50% {background-position: -451px 0;}
+    75% {background-position: -753px 0;}
+    100% {background-position: -300px 0;}
+}
+
+@-webkit-keyframes person-flower-slow {
+    0% {background-position: -453px 0;}
+    25% {background-position: -904px 0;}
+    50% {background-position: -451px 0;}
+    75% {background-position: -753px 0;}
+    100% {background-position: -300px 0;}
+}
+
+@-moz-keyframes person-flower-slow {
+    0% {background-position: -453px 0;}
+    25% {background-position: -904px 0;}
+    50% {background-position: -451px 0;}
+    75% {background-position: -753px 0;}
+    100% {background-position: -300px 0;}
+}
+
+

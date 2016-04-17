@@ -1,0 +1,118 @@
+.a_background{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.a_background_top{
+    width: 100%;
+    height: 71.6%;
+    background-image: url("../images/background/a_background_top.png");
+    background-size: 100% 100%;
+}
+
+.a_background_mid{
+    width: 100%;
+    height: 13.1%;
+    background-image: url("../images/background/a_background_mid.png");
+    background-size: 100% 100%;
+}
+
+.a_background_bot{
+    width: 100%;
+    height: 15.3%;
+    background-image: url("../images/background/a_background_bottom.png");
+    background-size: 100% 100%;
+}
+
+#sun{
+    position: absolute;
+    z-index: 1;
+    height: 201px;
+    width: 201px;
+    right: 40%;
+    background: url("../images/sun.png") no-repeat;
+}
+
+.rotation{
+    animation: rotation 30s;
+    -webkit-animation: rotation 30s;
+    -moz-animation: rotation 30s;  
+}
+
+@keyframes rotation {
+    0% {transform: translateX(0) translateY(0);}
+    100% {transform: translateX(-2000px) translateY(400px);}
+}
+
+@-webkit-keyframes rotation {
+    0% {transform: translateX(0) translateY(0);}
+    100% {transform: translateX(-2000px) translateY(400px);}
+}
+
+@-moz-keyframes rotation {
+    0% {transform: translateX(0) translateY(0);}
+    100% {transform: translateX(-2000px) translateY(400px);}
+}
+
+.cloud{
+    z-index: 2;
+    position: absolute;
+}
+
+.cloud1{
+    width: 181px;
+    height: 101px;
+    left: -5%;
+    top: 15%;
+    background: url("../images/cloud1.png") no-repeat;
+}
+
+.cloud1Anim{
+    animation: smallCloud 30s infinite;
+    -webkit-animation: smallCloud 30s infinite;
+    -moz-animation: smallCloud 30s infinite; 
+}
+
+.cloud2Anim{
+    animation: largeCloud 30s infinite;
+    -webkit-animation: largeCloud 30s infinite;
+    -moz-animation: largeCloud 30s infinite; 
+}
+
+.cloud2{
+    width: 301px;
+    height: 140px;
+    right: -5%;
+    background: url("../images/cloud2.png") no-repeat;
+}
+
+@keyframes smallCloud {
+    0% {left: -5%;}
+    100% {left: 100%;}
+}
+
+@-webkit-keyframes smallCloud {
+    0% {left: -5%;}
+    100% {left: 100%;}
+}
+
+@-moz-keyframes smallCloud {
+    0% {right: -5%;}
+    100% {right: 100%;}
+}
+
+@keyframes largeCloud {
+    0% {right: -5%;}
+    100% {right: 100%;}
+}
+
+@-webkit-keyframes largeCloud {
+    0% {right: -5%;}
+    100% {right: 100%;}
+}
+
+@-moz-keyframes largeCloud {
+    0% {right: -5%;}
+    100% {right: 100%;}
+}
