@@ -78,15 +78,10 @@
         <div id="snowflake"></div>
         <div id="boy" class="charactor"></div>
     </div>
-    <div class="button">
-        <button>开始</button>
-        <button>暂停</button>
-    </div>
     <script src="js/jquery-1.12.3.min.js"></script>
     <script src="js/jquery.transit.min.js"></script>
     <script src="js/Swipe.js"></script>
     <script src="js/Qixi.js"></script>
-    <!--<script src="js/BoyWalk.js"></script>-->
     <script>
         $(function(){
             var container = $('#content');
@@ -120,9 +115,7 @@
             var bridgeY = function(){
                 var data = getValue('.c_background_mid');
                 return data.top;
-            }();
-            
-            swipe.scrollTo(container.width() * 2, 0);  
+            }();  
             
             var girl = {
                 elem: $('.girl'),
@@ -147,9 +140,7 @@
             }
             
             girl.setOffset();
-            
-            boy.setFlowerWalk();
-            
+ 
             var logo = {
                 elem: $('.logo'),
                 run: function(){
@@ -160,38 +151,15 @@
                 }
             };
             
-            // var bird = {
-            //     elem: $(".bird"),
-            //     fly: function() {
-            //         this.elem.addClass('birdFly')
-            //         this.elem.transition({
-            //             right: container.width()
-            //         }, 15000, 'linear');
-            //     }
-            // };
-            
-            // function startRun(){
-            //     boy.walkTo(2000, 0.5)
-            //         .then(function(){
-            //             boy.stopWalk();
-            //         }).then(function(){
-            //             return openDoor();
-            //         }).then(function(){
-            //             lamp.bright();
-            //         }).then(function(){
-            //             return boy.toShop(2000);
-            //         }).then(function(){
-            //             boy.takeFlower();
-            //         }).then(function(){
-            //             bird.fly();   
-            //         }).then(function(){
-            //             return boy.outShop(2000);
-            //         }).then(function(){
-            //             return shutDoor();
-            //         }).then(function(){
-            //             lamp.dark();
-            //         });
-            // }
+            var bird = {
+                elem: $(".bird"),
+                fly: function() {
+                    this.elem.addClass('birdFly')
+                    this.elem.transition({
+                        right: container.width()
+                    }, 15000, 'linear');
+                }
+            };
             
             function snowflake(){
                 var $flakeContainer = $('#snowflake');
@@ -243,8 +211,8 @@
             
             var audioConfig = {
                 enable: true,
-                playUrl: 'music/happy.wav',
-                cycleUrl: 'music/circulation.wav'
+                playUrl: 'music/happy.mp3',
+                cycleUrl: 'music/circulation.mp3'
             }
             
             function html5Audio(url, loop){
@@ -261,30 +229,54 @@
                 }
             }
             
-            $('button:first').on('click', function(){ 
-                //startRun();
-                // boy.walkTo(2000, 0.15)
-                //     .then(function(){
-                //         return boy.walkTo(1500, 0.25, (bridgeY -girl.getHeight()) / visualHeight);
-                //     }).then(function(){
-                //         var proptionX = (girl.getOffset().left - boy.getWidth() + girl.getWidth() / 5) / visualWidth;
-                //         return boy.walkTo(1500, proptionX);
-                //     }).then(function(){
-                //         boy.resetOriginal();
-                //     }).then(function(){
-                //         setTimeout(function(){
-                //             girl.rotate();
-                //             boy.rotate(function(){
-                //                 logo.run();
-                //             });
-                //         }, 1000);
-                //     });
-                snowflake();
-                var audio1 = html5Audio(audioConfig.playUrl);
+            var audio1 = html5Audio(audioConfig.playUrl);
                 audio1.end(function(){
                     html5Audio(audioConfig.cycleUrl, true);
                 });
-            });
+                
+                boy.walkTo(2000, 0.2)
+                    .then(function() {
+                        scrollTo(5000, 1);
+                    }).then(function() {
+                        return boy.walkTo(5000, 0.5);
+                    }).then(function(){
+                        boy.stopWalk();
+                    }).then(function(){
+                        return openDoor();
+                    }).then(function(){
+                        lamp.bright();
+                    }).then(function(){
+                        return boy.toShop(2000);
+                    }).then(function(){
+                        boy.takeFlower();
+                    }).then(function(){
+                        bird.fly();   
+                    }).then(function(){
+                        return boy.outShop(2000);
+                    }).then(function(){
+                        return shutDoor();
+                    }).then(function(){
+                        lamp.dark();
+                    }).then(function() {
+                        scrollTo(2000, 2);
+                    }).then(function(){
+                        return boy.walkTo(2000, 0.15);
+                    }).then(function(){
+                        return boy.walkTo(1500, 0.25, (bridgeY -girl.getHeight()) / visualHeight);
+                    }).then(function(){
+                        var proptionX = (girl.getOffset().left - boy.getWidth() + girl.getWidth() / 5) / visualWidth;
+                        return boy.walkTo(1500, proptionX);
+                    }).then(function(){
+                        boy.resetOriginal();
+                    }).then(function(){
+                        setTimeout(function(){
+                            girl.rotate();
+                            boy.rotate(function(){
+                                logo.run();
+                                snowflake();
+                            });
+                        }, 1000);
+                    });  
 
         });
     </script>
